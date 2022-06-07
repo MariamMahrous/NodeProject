@@ -22,17 +22,23 @@ app.post('/login', async(req, res) => {
     }
 })
 
-app.post('/logout', async(req, res) => {
-    try {
-        let user = await User.findByCradentails(req.body.token);
-        jwt.destroy(token);
-        res.send({ user });
-    } catch (error) {
-        res.status(400).send(error);
-    }
+// app.post('/logout', async(req, res) => {
+//     try {
+//         let user = await User.findByCradentails(req.body.token);
+//         jwt.destroy(token);
+//         res.send({ user });
+//     } catch (error) {
+//         res.status(400).send(error);
+//     }
+// })
+
+
+app.delete('/logout', async(req, res) => {
+
+        let res = (await User.findOneAndDelete(req.body.token));
+       
+      
 })
-
-
 
 
 
