@@ -1,6 +1,8 @@
 let mongoose = require('mongoose');
 let express = require('express');
 let app = express();
+let product = require('./routes/product')
+let category = require('./routes/category')
 let user = require('./routes/user')
 let bcrypt = require('bcryptjs');
 let jwt = require('jsonwebtoken');
@@ -22,27 +24,10 @@ app.post('/login', async(req, res) => {
     }
 })
 
-// app.post('/logout', async(req, res) => {
-//     try {
-//         let user = await User.findByCradentails(req.body.token);
-//         jwt.destroy(token);
-//         res.send({ user });
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// })
 
 
-app.delete('/logout', async(req, res) => {
-
-        let res = (await User.findOneAndDelete(req.body.token));
-       
-      
-})
-
-
-
-
+app.use('/product', product);
+app.use('/category', category);
 app.use('/user', user);
 
 app.listen(5000)
